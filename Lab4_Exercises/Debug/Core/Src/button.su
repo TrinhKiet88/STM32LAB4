@@ -1,0 +1,6 @@
+button.c:23:6:init_buffer	16	static
+button.c:36:6:button_reading	16	static
+button.c:70:15:is_button_pressed	16	static
+button.c:75:15:is_button_pressed_1s	16	static
+button.c:80:15:is_button_held	16	static
+button.c:85:6:reset_flagForButtonHold	16	static
