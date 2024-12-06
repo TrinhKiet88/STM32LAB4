@@ -72,4 +72,4 @@ uint8_t SCH_Delete_Task(uint32_t taskID) {
     return 1;
 }
 
-#endif /* INC_BUTTON_H_ */
+#endif

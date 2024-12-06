@@ -14,6 +14,7 @@
 #include "led_display.h"
 //#include "timer.h"
 #include "global.h"
+#include "button.h"
 
 void fsm_manual();
 
