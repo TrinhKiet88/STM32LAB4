@@ -105,21 +105,18 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   	  	init_buffer();
     	LedTimeDurationInit();
-    	SCH_Add_Task(init_buffer, 1, 1);
-    	SCH_Add_Task(LedTimeDurationInit,1, 1);
+//    	SCH_Add_Task(init_buffer, 1, 1);
+//    	SCH_Add_Task(LedTimeDurationInit,1, 1);
     	// Thêm các task vào scheduler
     	//SCH_Add_Task(NormalMode, 1, 100);
     	SCH_Add_Task(fsm_automatic, 1, 100);
-    	//SCH_Add_Task(toggle_red, 50, 100);
-    	//SCH_Add_Task(toggle_yellow, 50, 100);
-    	//SCH_Add_Task(toggle_green, 50, 100);
-    	SCH_Add_Task(fsm_manual, 1 , 1);
+    	SCH_Add_Task(fsm_manual, 2 , 1);
     	SCH_Add_Task(toggle_led, 50, 1000);
     	SCH_Add_Task(LEDScanning, 0, 1);
-    	// Thêm task đ�?c nút nhấn vào scheduler
-    	SCH_Add_Task(button_reading, 1, 1);  // �?�?c nút nhấn mỗi 10ms
+    	SCH_Add_Task(button_reading, 1, 1);
   while (1)
   {
+
 	  SCH_Dispatch_Tasks();
     /* USER CODE END WHILE */
 
@@ -228,9 +225,8 @@ static void MX_GPIO_Init(void)
                           |MODE_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOB, BUTTON_1_Pin|BUTTON_2_Pin|BUTTON_3_Pin|G1_Pin
-                          |R2_Pin|Y2_Pin|G2_Pin|R1_Pin
-                          |Y1_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOB, G1_Pin|R2_Pin|Y2_Pin|G2_Pin
+                          |R1_Pin|Y1_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pins : SEG0_Pin SEG1_Pin SEG2_Pin SEG3_Pin
                            SEG4_Pin SEG5_Pin SEG6_Pin LED_RED_Pin
@@ -245,12 +241,16 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
-  /*Configure GPIO pins : BUTTON_1_Pin BUTTON_2_Pin BUTTON_3_Pin G1_Pin
-                           R2_Pin Y2_Pin G2_Pin R1_Pin
-                           Y1_Pin */
-  GPIO_InitStruct.Pin = BUTTON_1_Pin|BUTTON_2_Pin|BUTTON_3_Pin|G1_Pin
-                          |R2_Pin|Y2_Pin|G2_Pin|R1_Pin
-                          |Y1_Pin;
+  /*Configure GPIO pins : BUTTON_1_Pin BUTTON_2_Pin BUTTON_3_Pin */
+  GPIO_InitStruct.Pin = BUTTON_1_Pin|BUTTON_2_Pin|BUTTON_3_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
+
+  /*Configure GPIO pins : G1_Pin R2_Pin Y2_Pin G2_Pin
+                           R1_Pin Y1_Pin */
+  GPIO_InitStruct.Pin = G1_Pin|R2_Pin|Y2_Pin|G2_Pin
+                          |R1_Pin|Y1_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;

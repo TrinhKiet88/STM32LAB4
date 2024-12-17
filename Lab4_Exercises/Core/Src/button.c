@@ -1,5 +1,6 @@
 #include <button.h>
 
+//----------------------(đọc nút nhấn và chống nhiễu)-------------
 #define NO_OF_BUTTONS					3
 
 #define DURATION_FOR_AUTO_INCREASING	200 / 1
@@ -18,6 +19,7 @@ static uint8_t flagForButtonPress1s[NO_OF_BUTTONS];
 static uint8_t flagForButtonHold[NO_OF_BUTTONS];
 static uint16_t counterForButtonPress1s[NO_OF_BUTTONS];
 static uint16_t counterForButtonHold[NO_OF_BUTTONS];
+//-------------------(đọc nút nhấn và chống nhiễu)------------------
 
 
 void init_buffer() {
